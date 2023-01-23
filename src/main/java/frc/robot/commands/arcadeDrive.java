@@ -6,47 +6,31 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
-import frc.robot.subsystems.attempt;
+import frc.robot.subsystems.drivetrain;
 
-public class attemptCmd extends CommandBase {
-  /** Creates a new atteptCmd. */
-  double situtation = 1;
-  double situtation1 = 1;
-  public attemptCmd(attempt m_attempt) {
-    addRequirements(m_attempt);
+public class arcadeDrive extends CommandBase {
+  /** Creates a new arcadeDrive. */
+  public arcadeDrive(drivetrain m_drive) {
+    addRequirements(m_drive);
     // Use addRequirements() here to declare subsystem dependencies.
   }
+  private double maxSpeed = 0.1;
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    if(situtation == 1){
-      situtation1 = 1;
-      situtation = 2;
-      System.out.println("calis");
-    }else if(situtation == 2){
-      situtation1 = 2;
-      situtation = 1;
-      System.out.println("kapan");
-    }
+    RobotContainer.m_drive.setMaxSpeed(maxSpeed);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(situtation1 == 1){
-      RobotContainer.m_attempt.setSpeed(0.5);
-    }else if(situtation1 == 2){
-      RobotContainer.m_attempt.setSpeed(0);
-    }
-    
+    RobotContainer.m_drive.drive(RobotContainer.getMainController());
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
-    
-  }
+  public void end(boolean interrupted) {}
 
   // Returns true when the command should end.
   @Override

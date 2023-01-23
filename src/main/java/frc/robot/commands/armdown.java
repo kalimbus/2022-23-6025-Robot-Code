@@ -6,46 +6,29 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
-import frc.robot.subsystems.attempt;
+import frc.robot.subsystems.arm;
 
-public class attemptCmd extends CommandBase {
-  /** Creates a new atteptCmd. */
-  double situtation = 1;
-  double situtation1 = 1;
-  public attemptCmd(attempt m_attempt) {
-    addRequirements(m_attempt);
+public class armdown extends CommandBase {
+  /** Creates a new armdown. */
+  public armdown(arm m_arm) {
+    addRequirements(m_arm);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-    if(situtation == 1){
-      situtation1 = 1;
-      situtation = 2;
-      System.out.println("calis");
-    }else if(situtation == 2){
-      situtation1 = 2;
-      situtation = 1;
-      System.out.println("kapan");
-    }
-  }
+  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(situtation1 == 1){
-      RobotContainer.m_attempt.setSpeed(0.5);
-    }else if(situtation1 == 2){
-      RobotContainer.m_attempt.setSpeed(0);
-    }
-    
+    RobotContainer.m_arm.setSpeed(-0.2);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    
+    RobotContainer.m_arm.setSpeed(0);
   }
 
   // Returns true when the command should end.

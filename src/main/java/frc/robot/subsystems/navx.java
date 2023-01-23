@@ -6,12 +6,14 @@ package frc.robot.subsystems;
 
 import com.kauailabs.navx.frc.AHRS;
 
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class navx extends SubsystemBase {
   /** Creates a new navx. */
-   AHRS navx = new AHRS();
+  private final  AHRS navx = new AHRS();	
+
 
   public navx() {}
 

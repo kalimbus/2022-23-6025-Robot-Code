@@ -6,47 +6,40 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
-import frc.robot.subsystems.attempt;
+import frc.robot.subsystems.intakeWrist;
 
-public class attemptCmd extends CommandBase {
-  /** Creates a new atteptCmd. */
-  double situtation = 1;
-  double situtation1 = 1;
-  public attemptCmd(attempt m_attempt) {
-    addRequirements(m_attempt);
+public class wristArm extends CommandBase {
+  /** Creates a new wristArm. */
+  public wristArm(intakeWrist m_wrist) {
+    addRequirements(m_wrist);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
+  double kP = 0.0000050;
+  double kI = 0.000000025;
+  double error = 0;
+  double Error = 0;
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-    if(situtation == 1){
-      situtation1 = 1;
-      situtation = 2;
-      System.out.println("calis");
-    }else if(situtation == 2){
-      situtation1 = 2;
-      situtation = 1;
-      System.out.println("kapan");
-    }
-  }
+  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(situtation1 == 1){
-      RobotContainer.m_attempt.setSpeed(0.5);
-    }else if(situtation1 == 2){
-      RobotContainer.m_attempt.setSpeed(0);
-    }
-    
+    double currenttarget = ((RobotContainer.m_arm.encoderValue()) * -1);
+    double curentPosition = RobotContainer.m_iwrist.encoderValue();
+    error = currenttarget - curentPosition;
+    Error = Error + error;
+    double Pout = kP *error;
+    double Iout = kI * Error;
+    double speedPI = Pout + Iout;
+    RobotContainer.m_iwrist.setSpeed(speedPI);
+
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
-    
-  }
+  public void end(boolean interrupted) {}
 
   // Returns true when the command should end.
   @Override

@@ -4,49 +4,37 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
-import frc.robot.subsystems.attempt;
+import frc.robot.subsystems.analogGyro;
 
-public class attemptCmd extends CommandBase {
-  /** Creates a new atteptCmd. */
-  double situtation = 1;
-  double situtation1 = 1;
-  public attemptCmd(attempt m_attempt) {
-    addRequirements(m_attempt);
+public class gyroCMD extends CommandBase {
+  /** Creates a new gyroCMD. */
+  boolean terminator = false;
+  public gyroCMD(analogGyro m_gyro) {
+    addRequirements(m_gyro);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    if(situtation == 1){
-      situtation1 = 1;
-      situtation = 2;
-      System.out.println("calis");
-    }else if(situtation == 2){
-      situtation1 = 2;
-      situtation = 1;
-      System.out.println("kapan");
-    }
+    RobotContainer.m_gyro.gyroCalibrate();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(situtation1 == 1){
-      RobotContainer.m_attempt.setSpeed(0.5);
-    }else if(situtation1 == 2){
-      RobotContainer.m_attempt.setSpeed(0);
+    if(RobotContainer.m_gyro.getgyro() == 90){
+      SmartDashboard.putBoolean("value", terminator);
+      terminator = true;
     }
-    
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
-    
-  }
+  public void end(boolean interrupted) {}
 
   // Returns true when the command should end.
   @Override
