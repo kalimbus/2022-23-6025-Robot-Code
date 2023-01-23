@@ -12,20 +12,20 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class intakeWrist extends SubsystemBase {
   /** Creates a new intakeWrist. */
-  WPI_VictorSPX wristM = new WPI_VictorSPX(01);
-  Encoder wristE = new Encoder(0, 1);
+  WPI_VictorSPX wristMotor = new WPI_VictorSPX(01);
+  Encoder wristEncoder = new Encoder(0, 1);
   public intakeWrist() {
   }
   public void setSpeed(double speed){
-    wristM.set(speed);
+    wristMotor.set(speed);
   }
 
   public void resetEnc(){
-    wristE.reset();
+    wristEncoder.reset();
   }
 
   public double encoderValue(){
-    return wristE.get();
+    return wristEncoder.get();
   }
 
   @Override

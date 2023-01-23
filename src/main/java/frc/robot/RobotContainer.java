@@ -7,16 +7,16 @@ package frc.robot;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.accelerometerCMD;
 import frc.robot.commands.arcadeDrive;
-import frc.robot.commands.armdown;
-import frc.robot.commands.armup;
+import frc.robot.commands.armWristDown;
+import frc.robot.commands.armWristUp;
 import frc.robot.commands.attemptAuto;
 import frc.robot.commands.autoMovement;
 //import frc.robot.commands.attemptCmd;
 import frc.robot.commands.gyroCMD;
-import frc.robot.commands.wristArm;
+import frc.robot.commands.intakeWristCmd;
 import frc.robot.subsystems.accelerometer;
 import frc.robot.subsystems.analogGyro;
-import frc.robot.subsystems.arm;
+import frc.robot.subsystems.armWrist;
 import frc.robot.subsystems.attempt;
 import frc.robot.subsystems.drivetrain;
 import frc.robot.subsystems.intakeWrist;
@@ -48,7 +48,7 @@ public class RobotContainer {
   public static final drivetrain m_drive = new drivetrain();
   public static final analogGyro m_gyro = new analogGyro();
   public static final accelerometer m_accelerometer = new accelerometer();
-  public static final arm m_arm = new arm();
+  public static final armWrist m_arm = new armWrist();
   public static final intakeWrist m_iwrist = new intakeWrist();
 
   //Commands
@@ -56,14 +56,14 @@ public class RobotContainer {
 
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
-  public static final XboxController driver = new XboxController(OperatorConstants.kDriverControllerPort);
+  public static final XboxController driverController = new XboxController(OperatorConstants.kDriverControllerPort);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
     configureBindings();
     m_drive.setDefaultCommand(new arcadeDrive(m_drive));
-    m_iwrist.setDefaultCommand(new wristArm(m_iwrist));
+    m_iwrist.setDefaultCommand(new intakeWristCmd(m_iwrist));
   }
 
   /**
@@ -80,13 +80,13 @@ public class RobotContainer {
 
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
-    new JoystickButton(driver, 1).whileTrue(new gyroCMD(m_gyro));
+    new JoystickButton(driverController, 1).whileTrue(new gyroCMD(m_gyro));
     
-    new JoystickButton(driver, 2).whileTrue(new accelerometerCMD(m_accelerometer));
+    new JoystickButton(driverController, 2).whileTrue(new accelerometerCMD(m_accelerometer));
 
-    new JoystickButton(driver, 3).whileTrue(new armup(m_arm));
+    new JoystickButton(driverController, 3).whileTrue(new armWristUp(m_arm));
 
-    new JoystickButton(driver, 4).whileTrue(new armdown(m_arm));
+    new JoystickButton(driverController, 4).whileTrue(new armWristDown(m_arm));
 
     //new JoystickButton(driver, 3).whileTrue(new navxCMD(m_navx));
 

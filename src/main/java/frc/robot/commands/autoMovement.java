@@ -41,13 +41,13 @@ public class autoMovement extends CommandBase {
     curentPosition = RobotContainer.m_drive.encoderValueRight();
     error = targetEncoderValue - curentPosition;
     Error = Error + error;
-    double Pout = kP *error;
-    double Iout = kI * Error;
-    double speedPI = Pout + Iout;
+    double pAdjusment = kP *error;
+    double ıAdjustment = kI * Error;
+    double speedPI = pAdjusment + ıAdjustment;
     RobotContainer.m_drive.setSpeed(speedPI);
-    SmartDashboard.putNumber("speedP",speedPI);
+    SmartDashboard.putNumber("Speed",speedPI);
     SmartDashboard.putNumber("Current Position", curentPosition);
-    SmartDashboard.putNumber("Target with -7500", targetEncoderValue -17500);
+    
   }
 
   // Called once the command ends or is interrupted.

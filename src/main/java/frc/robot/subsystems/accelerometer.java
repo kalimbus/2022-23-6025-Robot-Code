@@ -11,19 +11,19 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class accelerometer extends SubsystemBase {
   /** Creates a new accelerometer. */
-  Accelerometer accelerometer = new BuiltInAccelerometer();
+  Accelerometer roborioAccelerometer = new BuiltInAccelerometer();
   public accelerometer() {}
 
   public double getX(){
-    return accelerometer.getX();
+    return roborioAccelerometer.getX();
   }
 
   public double getY(){
-    return accelerometer.getY();
+    return roborioAccelerometer.getY();
   }
 
   public double getZ(){
-    return accelerometer.getZ();
+    return roborioAccelerometer.getZ();
   }
 
 

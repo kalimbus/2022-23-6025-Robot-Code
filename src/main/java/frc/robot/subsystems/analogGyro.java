@@ -10,20 +10,20 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class analogGyro extends SubsystemBase {
   /** Creates a new analogGyro. */
-  ADXRS450_Gyro gyro = new ADXRS450_Gyro();
+  ADXRS450_Gyro gyroAD = new ADXRS450_Gyro();
 
   public analogGyro() {}
 
   public double getgyro(){
-    return gyro.getAngle();
+    return gyroAD.getAngle();
   }
 
   public void gyroCalibrate(){
-    gyro.calibrate();
+    gyroAD.calibrate();
   }
 
   public boolean isConnected(){
-    return gyro.isConnected();
+    return gyroAD.isConnected();
   }
 
 
