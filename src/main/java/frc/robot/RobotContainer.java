@@ -10,23 +10,25 @@ import frc.robot.commands.arcadeDrive;
 import frc.robot.commands.armWristDown;
 import frc.robot.commands.armWristUp;
 import frc.robot.commands.attemptAuto;
-import frc.robot.commands.autoMovement;
+//import frc.robot.commands.autoMovement;
 //import frc.robot.commands.attemptCmd;
-import frc.robot.commands.gyroCMD;
-import frc.robot.commands.intakeWristCmd;
+//import frc.robot.commands.gyroCMD;
+import frc.robot.commands.pneumaticCMD;
+//import frc.robot.commands.intakeWristCmd;
 import frc.robot.subsystems.accelerometer;
 import frc.robot.subsystems.analogGyro;
 import frc.robot.subsystems.armWrist;
 import frc.robot.subsystems.attempt;
 import frc.robot.subsystems.drivetrain;
+import frc.robot.subsystems.elevator;
 import frc.robot.subsystems.intakeWrist;
 import frc.robot.subsystems.navx;
 import frc.robot.subsystems.pneumatic;
-
-
+import frc.robot.subsystems.telescopicArm;
+import frc.robot.subsystems.turret;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+//import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -48,9 +50,11 @@ public class RobotContainer {
   public static final drivetrain m_drive = new drivetrain();
   public static final analogGyro m_gyro = new analogGyro();
   public static final accelerometer m_accelerometer = new accelerometer();
-  public static final armWrist m_arm = new armWrist();
+  public static final armWrist m_armwrist = new armWrist();
   public static final intakeWrist m_iwrist = new intakeWrist();
-
+  public static final turret m_turret = new turret();
+  public static final telescopicArm m_telescopic = new telescopicArm();
+  public static final elevator m_elevator = new elevator();
   //Commands
   public static final attemptAuto m_attemptauto = new attemptAuto(m_drive);
 
@@ -63,7 +67,7 @@ public class RobotContainer {
     // Configure the trigger bindings
     configureBindings();
     m_drive.setDefaultCommand(new arcadeDrive(m_drive));
-    m_iwrist.setDefaultCommand(new intakeWristCmd(m_iwrist));
+    //m_iwrist.setDefaultCommand(new intakeWristCmd(m_iwrist));
   }
 
   /**
@@ -80,13 +84,13 @@ public class RobotContainer {
 
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
-    new JoystickButton(driverController, 1).whileTrue(new gyroCMD(m_gyro));
+    new JoystickButton(driverController, 1).whileTrue(new pneumaticCMD(m_pneumatic));
     
     new JoystickButton(driverController, 2).whileTrue(new accelerometerCMD(m_accelerometer));
 
-    new JoystickButton(driverController, 3).whileTrue(new armWristUp(m_arm));
+    new JoystickButton(driverController, 3).whileTrue(new armWristUp(m_armwrist));
 
-    new JoystickButton(driverController, 4).whileTrue(new armWristDown(m_arm));
+    new JoystickButton(driverController, 4).whileTrue(new armWristDown(m_armwrist));
 
     //new JoystickButton(driver, 3).whileTrue(new navxCMD(m_navx));
 
@@ -100,14 +104,15 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
     //return m_attemptauto;
-    return new SequentialCommandGroup(
+    /*return new SequentialCommandGroup(
       new autoMovement(m_drive),
       new attemptAuto(m_drive),
       new autoMovement(m_drive)
-    );
+    );*/
+    return new attemptAuto(m_drive);
   }
 
   public static XboxController getMainController(){
-    return driver;
+    return driverController;
   }
 }

@@ -26,7 +26,7 @@ public class intakeWristCmd extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double currenttarget = ((RobotContainer.m_arm.encoderValue()) * -1);
+    double currenttarget = ((RobotContainer.m_armwrist.encoderValue()) * -1);
     double curentPosition = RobotContainer.m_iwrist.encoderValue();
     error = currenttarget - curentPosition;
     Error = Error + error;

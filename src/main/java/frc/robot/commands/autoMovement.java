@@ -42,8 +42,8 @@ public class autoMovement extends CommandBase {
     error = targetEncoderValue - curentPosition;
     Error = Error + error;
     double pAdjusment = kP *error;
-    double ıAdjustment = kI * Error;
-    double speedPI = pAdjusment + ıAdjustment;
+    double iAdjustment = kI * Error;
+    double speedPI = pAdjusment + iAdjustment;
     RobotContainer.m_drive.setSpeed(speedPI);
     SmartDashboard.putNumber("Speed",speedPI);
     SmartDashboard.putNumber("Current Position", curentPosition);

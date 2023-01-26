@@ -18,7 +18,8 @@ public class gyroArc extends CommandBase {
   double kI = 0.000000025;
   double error = 0;
   double Error = 0;
-
+  double currentAngle;
+  double targetAngle;
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
@@ -29,7 +30,11 @@ public class gyroArc extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    
+    currentAngle = RobotContainer.m_gyro.getgyro();
+
+    error = targetAngle - currentAngle;
+    //double pAdjustment = kP * error;
+    //Finishing after it
   }
 
   // Called once the command ends or is interrupted.
