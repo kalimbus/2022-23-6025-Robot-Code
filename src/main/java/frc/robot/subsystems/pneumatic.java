@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class pneumatic extends SubsystemBase {
   /** Creates a new pneumatic. */ 
   DoubleSolenoid piston = new DoubleSolenoid(04,PneumaticsModuleType.CTREPCM, 0, 1);
+  
 
   public pneumatic() {}
 

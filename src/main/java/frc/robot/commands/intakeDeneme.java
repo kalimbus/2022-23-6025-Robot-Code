@@ -5,16 +5,18 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-//import frc.robot.RobotContainer;
-import frc.robot.subsystems.armWrist;
+import frc.robot.RobotContainer;
+import frc.robot.Constants.kSpeed;
+import frc.robot.subsystems.intakeMotor;
 
-public class armWristUp extends CommandBase {
-  /** Creates a new armup. */
-  public armWristUp(armWrist m_arm) {
-    addRequirements(m_arm);
+public class intakeDeneme extends CommandBase {
+  /** Creates a new intakeDeneme. */
+  public intakeDeneme(intakeMotor m_intake) {
+    addRequirements(m_intake);
     // Use addRequirements() here to declare subsystem dependencies.
   }
-
+  boolean situtation = false;
+  boolean situtation1 = false;
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {}
@@ -22,13 +24,24 @@ public class armWristUp extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    //RobotContainer.m_armwrist.setSpeed(0.2);
+    if(situtation == false){
+      RobotContainer.m_intake.setSpeed(kSpeed.kIntakeSpeed);
+      situtation1 = true;
+    }else if(situtation == true){
+      RobotContainer.m_intake.setSpeed(-kSpeed.kIntakeSpeed);
+      situtation1 = false;
+    }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    //RobotContainer.m_armwrist.setSpeed(0);
+    RobotContainer.m_intake.setSpeed(kSpeed.kStop);
+    if(situtation1 == true){
+      situtation = true;
+    }else if(situtation1 == false){
+      situtation = false;
+    }
   }
 
   // Returns true when the command should end.

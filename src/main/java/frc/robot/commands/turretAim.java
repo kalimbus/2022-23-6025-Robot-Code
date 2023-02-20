@@ -4,10 +4,10 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.networktables.NetworkTableInstance;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+//import edu.wpi.first.networktables.NetworkTableInstance;
+//import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.RobotContainer;
+//import frc.robot.RobotContainer;
 import frc.robot.subsystems.turret;
 
 public class turretAim extends CommandBase {
@@ -32,7 +32,7 @@ public class turretAim extends CommandBase {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {
+  public void execute() {/* 
 
     tx = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0);
 
@@ -41,7 +41,7 @@ public class turretAim extends CommandBase {
     pAdjustment = error* kP;
     
     RobotContainer.m_turret.setSpeed((minSpeed + -pAdjustment));
-    RobotContainer.m_turret.setSpeed(-1*(minSpeed + -pAdjustment));
+    RobotContainer.m_turret.setSpeed(-(minSpeed + -pAdjustment));
 
     SmartDashboard.putNumber("pTurret", pAdjustment);
 
@@ -50,13 +50,13 @@ public class turretAim extends CommandBase {
     }else if(tx < 0){
       minSpeed = -0.1;
     }
-
+*/
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.m_turret.setSpeed(0);
+    //RobotContainer.m_turret.setSpeed(0);
   }
 
   // Returns true when the command should end.

@@ -16,4 +16,13 @@ public final class Constants {
   public static class OperatorConstants {
     public static final int kDriverControllerPort = 0;
   }
+ 
+  public static class kSpeed{
+    public static final double kAttemptSpeed = 0.1;
+    public static final double kMaxSpeed = 0.1;
+    public static final double kTurboSpeed = 1;
+    public static final double kIntakeSpeed= 0.2;
+    public static final double kStop = 0;
+  }
+
 }

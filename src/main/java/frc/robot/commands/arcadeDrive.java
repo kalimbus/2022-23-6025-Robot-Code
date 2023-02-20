@@ -6,6 +6,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
+import frc.robot.Constants.kSpeed;
 import frc.robot.subsystems.drivetrain;
 
 public class arcadeDrive extends CommandBase {
@@ -14,7 +15,7 @@ public class arcadeDrive extends CommandBase {
     addRequirements(m_drive);
     // Use addRequirements() here to declare subsystem dependencies.
   }
-  private double maxSpeed = 0.1;
+  private double maxSpeed = kSpeed.kMaxSpeed;
 
   // Called when the command is initially scheduled.
   @Override

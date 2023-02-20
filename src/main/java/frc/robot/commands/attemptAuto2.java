@@ -4,15 +4,21 @@
 
 package frc.robot.commands;
 
+
+import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.attempt;
 
-public class attemptCmd extends CommandBase {
-  /** Creates a new atteptCmd. */
-  double situtation = 1;
-  double situtation1 = 1;
-  public attemptCmd(attempt m_attempt) {
+public class attemptAuto2 extends CommandBase {
+  /** Creates a new attemptAuto2. */
+  PIDController pAdjustment = new PIDController(0.0000050, 0.000000025, 0.000000001);
+  double distance = 25;
+  double encoder = 2048;
+  double targetDistance = distance * encoder;
+  double currentPosition = 0;
+  public attemptAuto2(attempt m_attempt) {
     addRequirements(m_attempt);
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -20,40 +26,30 @@ public class attemptCmd extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    /* 
-    if(situtation == 1){
-      situtation1 = 1;
-      situtation = 2;
-      System.out.println("calis");
-    }else if(situtation == 2){
-      situtation1 = 2;
-      situtation = 1;
-      System.out.println("kapan");
-    }*/
+    //RobotContainer.m_attempt.resetEncoder();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {
-    RobotContainer.m_attempt.setSpeed(0.5);
-    /*if(situtation1 == 1){
-      RobotContainer.m_attempt.setSpeed(0.5);
-    }else if(situtation1 == 2){
-      RobotContainer.m_attempt.setSpeed(0);
-    }*/
-    
+  public void execute() { 
+    //currentPosition = RobotContainer.m_attempt.encoderValue();
+    RobotContainer.m_attempt.setSpeed(pAdjustment.calculate(currentPosition, targetDistance));
+    SmartDashboard.putNumber("SpeedTalon", pAdjustment.calculate(currentPosition, targetDistance));
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     RobotContainer.m_attempt.setSpeed(0);
-    
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+    if(currentPosition >= targetDistance){
+      return true;
+    }else{
     return false;
+    }
   }
 }

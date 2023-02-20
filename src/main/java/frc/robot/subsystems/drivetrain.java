@@ -53,7 +53,7 @@ public class drivetrain extends SubsystemBase {
   }
 
   public void drive(XboxController xBox){
-    drive(-xBox.getRawAxis(4),xBox.getRawAxis(1));
+    drive(-xBox.getRawAxis(4),-xBox.getRawAxis(1));
   }
 
   public void driveL(double Lmotor){

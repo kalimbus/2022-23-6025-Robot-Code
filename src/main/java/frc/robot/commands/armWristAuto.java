@@ -5,13 +5,11 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-//import frc.robot.RobotContainer;
-import frc.robot.subsystems.elevator;
 
-public class elevatorAuto extends CommandBase {
-  /** Creates a new elevatorAuto. */
-  public elevatorAuto(elevator m_elevator) {
-    addRequirements(m_elevator);
+
+public class armWristAuto extends CommandBase {
+  /** Creates a new armWristAuto. */
+  public armWristAuto() {
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -21,13 +19,13 @@ public class elevatorAuto extends CommandBase {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {/* 1
-    double targetEncoder = 90 * 2048;
-    //double currentEncoder = RobotContainer.m_elevator.encoderValue();
-    //double error = targetEncoder - currentEncoder;
-    double kP = 0.000001;
-    double pAdjustment = kP * error;
-    //RobotContainer.m_elevator.setSpeed(pAdjustment);*/
+  public void execute() {/*
+    double currentPosition = RobotContainer.m_armwrist.encoderValue();
+    double targetPosition = (-RobotContainer.m_elevator.encoderValue());
+    double error = targetPosition - currentPosition;
+    double kP = 0.0000000010;
+    double pAdjustment = kP*error;
+    RobotContainer.m_armwrist.setSpeed(pAdjustment);*/
   }
 
   // Called once the command ends or is interrupted.

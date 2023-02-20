@@ -5,7 +5,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.RobotContainer;
+//import frc.robot.RobotContainer;
 import frc.robot.subsystems.intakeWrist;
 
 public class intakeWristCmd extends CommandBase {
@@ -25,7 +25,7 @@ public class intakeWristCmd extends CommandBase {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {
+  public void execute() {/* 
     double currenttarget = ((RobotContainer.m_armwrist.encoderValue()) * -1);
     double curentPosition = RobotContainer.m_iwrist.encoderValue();
     error = currenttarget - curentPosition;
@@ -33,7 +33,7 @@ public class intakeWristCmd extends CommandBase {
     double Pout = kP *error;
     double Iout = kI * Error;
     double speedPI = Pout + Iout;
-    RobotContainer.m_iwrist.setSpeed(speedPI);
+    RobotContainer.m_iwrist.setSpeed(speedPI);*/
 
   }
 

@@ -6,29 +6,22 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 //import frc.robot.RobotContainer;
-import frc.robot.subsystems.elevator;
 
-public class elevatorAuto extends CommandBase {
-  /** Creates a new elevatorAuto. */
-  public elevatorAuto(elevator m_elevator) {
-    addRequirements(m_elevator);
+public class shifterOpen extends CommandBase {
+  /** Creates a new shifterOpen. */
+  public shifterOpen() {
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    //RobotContainer.m_shifter.pistonOpen();
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {/* 1
-    double targetEncoder = 90 * 2048;
-    //double currentEncoder = RobotContainer.m_elevator.encoderValue();
-    //double error = targetEncoder - currentEncoder;
-    double kP = 0.000001;
-    double pAdjustment = kP * error;
-    //RobotContainer.m_elevator.setSpeed(pAdjustment);*/
-  }
+  public void execute() {}
 
   // Called once the command ends or is interrupted.
   @Override

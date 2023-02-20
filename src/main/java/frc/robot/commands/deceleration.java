@@ -5,13 +5,12 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-//import frc.robot.RobotContainer;
-import frc.robot.subsystems.elevator;
+import frc.robot.subsystems.drivetrain;
 
-public class elevatorAuto extends CommandBase {
-  /** Creates a new elevatorAuto. */
-  public elevatorAuto(elevator m_elevator) {
-    addRequirements(m_elevator);
+public class deceleration extends CommandBase {
+  /** Creates a new deceleration. */
+  public deceleration(drivetrain m_drive) {
+    addRequirements(m_drive);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -21,13 +20,15 @@ public class elevatorAuto extends CommandBase {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {/* 1
-    double targetEncoder = 90 * 2048;
-    //double currentEncoder = RobotContainer.m_elevator.encoderValue();
-    //double error = targetEncoder - currentEncoder;
-    double kP = 0.000001;
-    double pAdjustment = kP * error;
-    //RobotContainer.m_elevator.setSpeed(pAdjustment);*/
+  public void execute() {/*
+    if(RobotContainer.driverController.getRawAxis(1) == 0){
+      if(RobotContainer.m_navx.navxgetxa() > 0 ){
+        for()
+      }
+      if(RobotContainer.m_navx.navxgetxa() < 0){
+
+      }
+    }*/
   }
 
   // Called once the command ends or is interrupted.

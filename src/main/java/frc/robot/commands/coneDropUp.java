@@ -4,11 +4,11 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.networktables.NetworkTable;
-import edu.wpi.first.networktables.NetworkTableEntry;
-import edu.wpi.first.networktables.NetworkTableInstance;
+//import edu.wpi.first.networktables.NetworkTable;
+//import edu.wpi.first.networktables.NetworkTableEntry;
+//import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.RobotContainer;
+//import frc.robot.RobotContainer;
 
 public class coneDropUp extends CommandBase {
   /** Creates a new coneDropUp. */
@@ -22,7 +22,7 @@ public class coneDropUp extends CommandBase {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {
+  public void execute() {/* 
     NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
     NetworkTableEntry ty = table.getEntry("ty");
     double targetOffsetAngle_Vertical = ty.getDouble(0.0);
@@ -53,7 +53,7 @@ public class coneDropUp extends CommandBase {
     RobotContainer.m_telescopic.setSpeed(pAdjustment);
     if(encoderValue > distanceWithEncoderValue){
       RobotContainer.m_telescopic.setSpeed(0);
-    }
+    }*/
   }
 
   // Called once the command ends or is interrupted.
