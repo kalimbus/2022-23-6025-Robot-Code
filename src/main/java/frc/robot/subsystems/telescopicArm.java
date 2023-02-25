@@ -5,30 +5,41 @@
 package frc.robot.subsystems;
 
 
-import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.TalonSRXFeedbackDevice;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
-import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class telescopicArm extends SubsystemBase {
   /** Creates a new telescopicArm. */
-  WPI_VictorSPX telescopicArm = new WPI_VictorSPX(04);
-  Encoder telescopicEncoder = new Encoder(1, 2);
-  public telescopicArm() {}
+  WPI_TalonSRX telescopicArm = new WPI_TalonSRX(11);
+  
+  public telescopicArm() {
+    telescopicArm.configFactoryDefault();
+
+    telescopicArm.setNeutralMode(NeutralMode.Coast);
+
+    telescopicArm.configSelectedFeedbackSensor(TalonSRXFeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
+  }
 
   public void setSpeed(double speed){
     telescopicArm.set(speed);
   }
 
   public double encoderValue(){
-    return telescopicArm.get();
+    return telescopicArm.getSelectedSensorPosition();
   }
 
   public void resetEncoder(){
-    telescopicEncoder.reset();
+    telescopicArm.setSelectedSensorPosition(0);
   }
 
+  public double gettY(){
+    return NetworkTableInstance.getDefault().getTable("limelight").getEntry("ty").getDouble(0.0);
+  }
   @Override
   public void periodic() {
     SmartDashboard.putNumber("Encoder Value", encoderValue());

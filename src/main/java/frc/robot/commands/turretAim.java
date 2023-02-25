@@ -21,6 +21,7 @@ public class turretAim extends CommandBase {
   double currenttx;
   double targettx = 0;
   double minSpeed;
+  
   double kP = 0.000000010;
 
   // Called when the command is initially scheduled.

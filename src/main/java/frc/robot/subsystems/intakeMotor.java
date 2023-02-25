@@ -23,7 +23,7 @@ public class intakeMotor extends SubsystemBase {
   }
 
   public void setSpeed(double speed){
-    intakeMotorLeft.set(speed);
+    intakeMotorLeft.set(-speed);
     intakeMotorRight.set(-speed);
   }
   @Override

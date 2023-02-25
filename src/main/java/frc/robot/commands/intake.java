@@ -22,7 +22,7 @@ public class intake extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    RobotContainer.m_intake.setSpeed(0.2);
+    RobotContainer.m_intake.setSpeed(0.4);
   }
 
   // Called once the command ends or is interrupted.

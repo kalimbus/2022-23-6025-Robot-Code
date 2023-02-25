@@ -4,34 +4,56 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
-import frc.robot.Constants.kSpeed;
-import frc.robot.subsystems.attempt;
+//import frc.robot.subsystems.attempt;
+import frc.robot.subsystems.telescopicArm;
 
 public class attemptAuto3 extends CommandBase {
   /** Creates a new attemptAuto3. */
-  public attemptAuto3(attempt m_attempt) {
+  public attemptAuto3(telescopicArm m_attempt) {
     addRequirements(m_attempt);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    RobotContainer.m_telescopic.resetEncoder();
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(RobotContainer.m_limit.getLimitSwitchState() == false && RobotContainer.m_limit.getLimitSwitchState2() == false){
-      RobotContainer.m_attempt.setSpeed(kSpeed.kAttemptSpeed);
-    }else if(RobotContainer.m_limit.getLimitSwitchState() == false){
-      RobotContainer.m_attempt.setSpeedLeft(kSpeed.kAttemptSpeed);
-    }else if(RobotContainer.m_limit.getLimitSwitchState2() == false){
-      RobotContainer.m_attempt.setSpeedRight(kSpeed.kAttemptSpeed);
-    }else{
-      RobotContainer.m_attempt.setSpeed(kSpeed.kAttemptSpeed);
-    }
+    double targetOffsetAngle_Vertical = RobotContainer.m_telescopic.gettY();
+    double encoderValue = RobotContainer.m_telescopic.encoderValue();
+    // 
+    double limelightMountAngleDegrees = 0;
+    
+    //
+    double limelightLensHeightInches = 0; //değişebilir
+    
+    // 
+    double goalHeightInches = 0 ;
+    
+    double angleToGoalDegrees = limelightMountAngleDegrees + targetOffsetAngle_Vertical;
+    double angleToGoalRadians = angleToGoalDegrees * (Math.PI / 180.0);
+    
+    //
+    double distanceFromLimelightToGoalInches = (goalHeightInches - limelightLensHeightInches)/Math.tan(angleToGoalRadians);
+  
+    double distanceFromMeter = distanceFromLimelightToGoalInches * 2.54;
+  
+    double distanceWithEncoderValue = distanceFromMeter * 2048;
+  
+    double error = distanceWithEncoderValue - encoderValue;
+    double kP = 0.000000010;
+  
+    double pAdjustment = kP * error;
+    RobotContainer.m_telescopic.setSpeed(pAdjustment);
+    SmartDashboard.putNumber("target with encoder", distanceWithEncoderValue);
+    SmartDashboard.putNumber("Speed Limelight", pAdjustment);
   }
 
   // Called once the command ends or is interrupted.

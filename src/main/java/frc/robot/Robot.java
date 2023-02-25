@@ -49,13 +49,15 @@ public class Robot extends TimedRobot {
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
-    m_compressor.enableDigital();
+    //m_compressor.enableDigital();
   SmartDashboard.putBoolean("Pressure", m_compressor.getPressureSwitchValue());
   }
 
   /** This function is called once each time the robot enters Disabled mode. */
   @Override
-  public void disabledInit() {}
+  public void disabledInit() {
+    m_compressor.disable();
+  }
 
   @Override
   public void disabledPeriodic() {}

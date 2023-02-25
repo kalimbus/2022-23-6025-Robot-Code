@@ -12,13 +12,24 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class limelight extends SubsystemBase {
   /** Creates a new limelight. */
-  limelight limelight = new limelight();
-  NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
-  NetworkTableEntry tx = table.getEntry("tx");
-  NetworkTableEntry ty = table.getEntry("ty");
-  NetworkTableEntry ta = table.getEntry("ta");
+  NetworkTable ll_table = NetworkTableInstance.getDefault().getTable("limelight");
+
+  NetworkTableEntry tx = ll_table.getEntry("tx");
+  NetworkTableEntry ty = ll_table.getEntry("ty");
+  NetworkTableEntry ta = ll_table.getEntry("ta");
 
   public limelight() {}
+
+
+  public void setPipeline0(){
+    ll_table.getEntry("pipeline").setNumber(0);
+  }
+  public void setPipeline1() {
+    ll_table.getEntry("pipeline").setNumber(1);
+  }
+  public double gettY(){
+    return ll_table.getEntry("ty").getDouble(0);
+  }
 
   @Override
   public void periodic() {

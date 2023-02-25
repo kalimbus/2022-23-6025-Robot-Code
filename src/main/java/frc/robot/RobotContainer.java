@@ -5,16 +5,25 @@
 package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
-import frc.robot.commands.arcadeDrive;
+//import frc.robot.commands.arcadeDrive;
 //import frc.robot.commands.armWristDown;
 //import frc.robot.commands.armWristUp;
 import frc.robot.commands.attemptAuto;
-//import frc.robot.commands.attemptAuto2;
 import frc.robot.commands.attemptAuto3;
-import frc.robot.commands.indrop;
-import frc.robot.commands.intake;
-import frc.robot.commands.intakeDeneme;
-import frc.robot.commands.intakeWithColor;
+//import frc.robot.commands.coneDrop;
+//import frc.robot.commands.limelightAprilTag;
+//import frc.robot.commands.limelightReflective;
+import frc.robot.commands.limelightType;
+//import frc.robot.commands.limelightType;
+//import frc.robot.commands.attemptAuto2;
+//import frc.robot.commands.attemptAuto3;
+//import frc.robot.commands.indrop;
+//import frc.robot.commands.intake;
+//import frc.robot.commands.intakeDeneme;
+//import frc.robot.commands.intakeWithColor;
+//import frc.robot.commands.turretAuto;
+//import frc.robot.commands.turretLeft;
+//import frc.robot.commands.turretRight;
 //import frc.robot.commands.attemptAuto2;
 //import frc.robot.commands.attemptCMD2;
 //import frc.robot.commands.attemptCmd;
@@ -34,14 +43,17 @@ import frc.robot.subsystems.attempt;
 import frc.robot.subsystems.colorSensor;
 import frc.robot.subsystems.drivetrain;
 import frc.robot.subsystems.intakeMotor;
+import frc.robot.subsystems.limelight;
 import frc.robot.subsystems.magneticLimitSwitch;
 //import frc.robot.subsystems.elevator;
 //import frc.robot.subsystems.intakeWrist;
 import frc.robot.subsystems.navx;
+
 import frc.robot.subsystems.pneumatic;
+import frc.robot.subsystems.telescopicArm;
 //import frc.robot.subsystems.shifter;
 //import frc.robot.subsystems.telescopicArm;
-//import frc.robot.subsystems.turret;
+import frc.robot.subsystems.turret;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 //import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
@@ -64,6 +76,7 @@ public class RobotContainer {
   public static final attempt m_attempt = new attempt();
   public static final pneumatic m_pneumatic = new pneumatic();
   public static final navx m_navx = new navx();
+  public static final limelight m_limelight = new limelight();
   public static final drivetrain m_drive = new drivetrain();
   public static final analogGyro m_gyro = new analogGyro();
   public static final accelerometer m_accelerometer = new accelerometer();
@@ -73,8 +86,8 @@ public class RobotContainer {
   //public static final shifter m_shifter = new shifter();
   //public static final armWrist m_armwrist = new armWrist();
   //public static final intakeWrist m_iwrist = new intakeWrist();
-  //public static final turret m_turret = new turret();
-  //public static final telescopicArm m_telescopic = new telescopicArm();
+  public static final turret m_turret = new turret();
+  public static final telescopicArm m_telescopic = new telescopicArm();
   //public static final elevator m_elevator = new elevator();
  
   //Commands
@@ -88,8 +101,8 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the trigger bindings
     configureBindings();
-    m_drive.setDefaultCommand(new arcadeDrive(m_drive));
-    m_pneumatic.setDefaultCommand(new intakeWithColor(m_pneumatic));
+    //m_drive.setDefaultCommand(new arcadeDrive(m_drive));
+    //m_pneumatic.setDefaultCommand(new intakeWithColor(m_pneumatic));
     //m_iwrist.setDefaultCommand(new intakeWristCmd(m_iwrist));
   }
 
@@ -110,14 +123,12 @@ public class RobotContainer {
     //new JoystickButton(driverController, 1).whileTrue(new attemptCmd(m_attempt));
     //new JoystickButton(driverController, 2).whileTrue(new attemptCMD2(m_attempt));
     //new JoystickButton(driverController, 3).whileTrue(new pneumaticCMD(m_pneumatic));
-    new JoystickButton(driverController, 1).whileTrue(new intake(m_intake));
-    new JoystickButton(driverController, 2).whileTrue(new indrop(m_intake));
-    new JoystickButton(driverController, 4).whileTrue(new intakeDeneme(m_intake));
-
-  
-
-
+    //new JoystickButton(driverController, 1).whileTrue(new turretLeft(m_turret));
+    //new JoystickButton(driverController, 2).whileTrue(new turretRight(m_turret));
+    //new JoystickButton(driverController, 3).whileTrue(new turretAuto(m_turret, 45));
+    //new JoystickButton(driverController, 1).whileTrue(new limelightType(m_limelight));
     //new JoystickButton(driver, 3).whileTrue(new navxCMD(m_navx));
+    new JoystickButton(driverController,8).whileTrue(new limelightType(m_limelight));
 
   }
 
@@ -134,7 +145,8 @@ public class RobotContainer {
       new attemptAuto(m_drive),
       new autoMovement(m_drive)
     );*/
-    return new attemptAuto3(m_attempt);
+    //return new attemptAuto3(m_attempt);
+    return new attemptAuto3(m_telescopic);
   }
 
   public static XboxController getMainController(){
