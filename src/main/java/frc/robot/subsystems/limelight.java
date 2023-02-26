@@ -31,6 +31,10 @@ public class limelight extends SubsystemBase {
     return ll_table.getEntry("ty").getDouble(0);
   }
 
+  public double gettX(){
+    return ll_table.getEntry("tx").getDouble(0);
+  }
+
   @Override
   public void periodic() {
     double x = tx.getDouble(0.0);
